@@ -23,24 +23,24 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # set(CPPFLAGS "-I/usr/local/Cellar/llvm/17.0.6/include;-I/usr/local/Cellar/libomp/17.0.6/include;-fopenmp")
 # set(LDFLAGS -L/usr/local/Cellar/llvm/17.0.6/lib)
 
-set(OpenMP_C_FLAGS "-Xclang -fopenmp -I/usr/local/Cellar/libomp/17.0.6/include")
-set(OpenMP_C_LIB_NAMES "libomp")
-set(OpenMP_libomp_LIBRARY "/usr/local/Cellar/libomp/17.0.6/lib/libomp.a")  
+# set(OpenMP_C_FLAGS "-Xclang -fopenmp -I/usr/local/Cellar/libomp/17.0.6/include")
+# set(OpenMP_C_LIB_NAMES "libomp")
+# set(OpenMP_libomp_LIBRARY "/usr/local/Cellar/libomp/17.0.6/lib/libomp.a")  
 
-set(OpenMP_CXX_FLAGS "-Xclang -fopenmp -I/usr/local/Cellar/libomp/17.0.6/include")
-set(OpenMP_CXX_LIB_NAMES "libomp")
-set(OpenMP_libomp_LIBRARY "/usr/local/Cellar/libomp/17.0.6/lib/libomp.a")  
+# set(OpenMP_CXX_FLAGS "-Xclang -fopenmp -I/usr/local/Cellar/libomp/17.0.6/include")
+# set(OpenMP_CXX_LIB_NAMES "libomp")
+# set(OpenMP_libomp_LIBRARY "/usr/local/Cellar/libomp/17.0.6/lib/libomp.a")  
 
 
-set(EXAMPLES parallel_pi parallel_pi_exclusion reduction reduction_pi fibbonacci )
+set(EXAMPLES parallel_pi parallel_pi_exclusion reduction reduction_pi fibbonacci average schedule)
 
 find_package(OpenMP REQUIRED)
 if(OpenMP_CXX_FOUND)
       add_executable(main main.cpp)
       target_link_libraries(main PRIVATE OpenMP::OpenMP_CXX)
 
-      add_executable(fourier_shift Sources/fourier_shift.c)
-      target_link_libraries(fourier_shift PRIVATE OpenMP::OpenMP_C)
+      # add_executable(fourier_shift Sources/fourier_shift.c)
+      # target_link_libraries(fourier_shift PRIVATE OpenMP::OpenMP_C)
 
 foreach(example ${EXAMPLES})
   add_executable(${example} Sources/${example}.cpp ${PROJECT_HEADERS} ${PROJECT_CONFIGS}) 

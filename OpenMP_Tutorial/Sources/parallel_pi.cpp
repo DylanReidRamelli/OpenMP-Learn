@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-static long num_steps = 10000000;
+static long long num_steps = 1000000000;
 double step;
-#define NUM_THREADS 8
+#define NUM_THREADS 12
 #define PAD 8  // Assume 64 byte L1 cache line size
 
 double start;
@@ -20,7 +20,7 @@ void parallelPiOne() {
 #pragma omp parallel
   {
     int ID = omp_get_thread_num();
-    int i;
+    long long i;
     double x;
     int nthrds = omp_get_num_threads();
 
@@ -78,6 +78,34 @@ void parallelPiTwo() {
   std::cout << pi << "\n";
 }
 
+
+// void parallel_pi_3(){
+//   double pi = 0.0;
+//   double sum[NUM_THREADS];
+//   int nthreads;
+
+//   start = omp_get_wtime();
+
+// #pragma omp parallel for schedule
+//   {
+//     for (int i = 0; i < num_steps; ++i)
+//     {
+//       /* code */
+//     }
+    
+//   }
+
+//   for (int i = 0; i < nthreads; ++i) {
+//     pi += sum[i] * step;
+//   }
+
+//   end = omp_get_wtime();
+//   std::cout << " Method 3: Work with " << NUM_THREADS
+//             << " threads took: " << end - start << "seconds."
+//             << "\n";
+//   std::cout << pi << "\n";
+// }
+
 int main(int argc, char const *argv[]) {
   double pi = 0.0;
   double sum[NUM_THREADS];
@@ -85,6 +113,7 @@ int main(int argc, char const *argv[]) {
   step = 1.0 / (double)num_steps;
   omp_set_num_threads(NUM_THREADS);
 
-  parallelPiOne();
+  // parallelPiOne();
   parallelPiTwo();
+  // parallel_pi_3();
 }

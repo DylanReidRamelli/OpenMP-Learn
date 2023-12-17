@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-// SINGLE PROGRAM MULTIUPLE DATA programming pattern SPMD
-static long num_steps = 1000000000;
+// SINGLE PROGRAM MULTIPLE DATA programming pattern SPMD
+static long long num_steps = 10000000000;
 double step;
-#define NUM_THREADS 4
+#define NUM_THREADS 8
 // #define PAD 8 // Assume 64 byte L1 cache line size
 
 double start;
@@ -20,7 +20,7 @@ void parallelPi() {
 #pragma omp parallel
   {
     int ID = omp_get_thread_num();
-    int i;
+    long long i;
     double x, sum;
     int nthrds = omp_get_num_threads();
 

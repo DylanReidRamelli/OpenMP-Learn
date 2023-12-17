@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-static long num_steps = 100000;
+static long num_steps = 1000000000;
 double step;
 
 int main() {
@@ -11,7 +11,7 @@ int main() {
 
   step = 1.0 / (double)num_steps;
 
-omp_set_num_threads(8);
+omp_set_num_threads(4);
 #pragma omp parallel
   {
     double x;
